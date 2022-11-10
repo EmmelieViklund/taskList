@@ -31,7 +31,7 @@ public class Task {
     private String caseLogs;
 
     @Column(nullable = false)
-    private final boolean isMarkedDone = false;
+    private boolean isMarkedDone = false;
 
     @CreationTimestamp
     @JsonFormat(pattern = "yy-MM-dd hh:mm", shape = JsonFormat.Shape.STRING)
@@ -111,6 +111,10 @@ public class Task {
 
     public boolean isMarkedDone() {
         return isMarkedDone;
+    }
+
+    public void setMarkedDone(boolean markedDone) {
+        isMarkedDone = markedDone;
     }
 
     public Date getCreatedAt() {
