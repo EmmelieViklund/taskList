@@ -74,10 +74,10 @@ public class TaskController {
         return new ResponseEntity<>(taskRepo.save(_task), HttpStatus.OK);
     }
 
-    //delete task by id
+    //delete task by employeeId
     @DeleteMapping("/task/delete/{id}")
     public ResponseEntity<HttpStatus> deleteTask(@PathVariable("id") Long id) {
-        taskRepo.deleteById(id);
+        taskRepo.deleteTaskById(id);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
