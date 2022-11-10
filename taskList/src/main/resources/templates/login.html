@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,7 +23,7 @@
                         <h4 class="mt-1 mb-3 pb-6"> Welcome to</h4>
                         <img src="8999-swedbank-logo-default.svg"
                           style="width: 400px;" alt="logo">
-                        <h5 class="mt-1 mb-5 pb-1"> Task List</h4>
+                        <h5 class="mt-1 mb-5 pb-1"> Task List</h5>
                       </div>
       
                       <form th:object="${user}" method="post" action="/onuserlogin">

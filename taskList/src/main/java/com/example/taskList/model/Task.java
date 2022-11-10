@@ -19,19 +19,15 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
     private Long id;
+    @Column(name = "prioritizationType")
+    private String prioritizationType;
 
-    @Column(name = "customerName")
-    private String customerName;
-    @Column(name = "GlobalCaseId")
-    private String globalCaseId;
-    @Column(name = "taskType")
-    private String taskType;
-
-    @Column(name = "caseLogs")
-    private String caseLogs;
-
-    @Column(nullable = false)
-    private boolean isMarkedDone = false;
+    @Column(name = "caseNotes")
+    private String caseNotes;
+    @UpdateTimestamp
+    @JsonFormat(pattern = "yy-MM-dd hh:mm", shape = JsonFormat.Shape.STRING)
+    @Column(name = "completion_At")
+    private LocalDateTime completionAt;
 
     @CreationTimestamp
     @JsonFormat(pattern = "yy-MM-dd hh:mm", shape = JsonFormat.Shape.STRING)
@@ -57,12 +53,11 @@ public class Task {
     public Task() {
     }
 
-    public Task(Long id, String customerName, String globalCaseId, String taskType, String caseLogs, Date createdAt, LocalDateTime updatedAt, Date expiresAt, Employee employee) {
+    public Task(Long id, String prioritizationType, String caseNotes, LocalDateTime completionAt, Date createdAt, LocalDateTime updatedAt, Date expiresAt, Employee employee) {
         this.id = id;
-        this.customerName = customerName;
-        this.globalCaseId = globalCaseId;
-        this.taskType = taskType;
-        this.caseLogs = caseLogs;
+        this.prioritizationType = prioritizationType;
+        this.caseNotes = caseNotes;
+        this.completionAt = completionAt;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.expiresAt = expiresAt;
@@ -77,44 +72,28 @@ public class Task {
         this.id = id;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getPrioritizationType() {
+        return prioritizationType;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setPrioritizationType(String prioritizationType) {
+        this.prioritizationType = prioritizationType;
     }
 
-    public String getGlobalCaseId() {
-        return globalCaseId;
+    public String getCaseNotes() {
+        return caseNotes;
     }
 
-    public void setGlobalCaseId(String globalCaseId) {
-        this.globalCaseId = globalCaseId;
+    public void setCaseNotes(String caseNotes) {
+        this.caseNotes = caseNotes;
     }
 
-    public String getTaskType() {
-        return taskType;
+    public LocalDateTime getCompletionAt() {
+        return completionAt;
     }
 
-    public void setTaskType(String taskType) {
-        this.taskType = taskType;
-    }
-
-    public String getCaseLogs() {
-        return caseLogs;
-    }
-
-    public void setCaseLogs(String caseLogs) {
-        this.caseLogs = caseLogs;
-    }
-
-    public boolean isMarkedDone() {
-        return isMarkedDone;
-    }
-
-    public void setMarkedDone(boolean markedDone) {
-        isMarkedDone = markedDone;
+    public void setCompletionAt(LocalDateTime completionAt) {
+        this.completionAt = completionAt;
     }
 
     public Date getCreatedAt() {
@@ -153,11 +132,9 @@ public class Task {
     public String toString() {
         return "Task{" +
                 "id=" + id +
-                ", customerName='" + customerName + '\'' +
-                ", globalCaseId='" + globalCaseId + '\'' +
-                ", taskType='" + taskType + '\'' +
-                ", caseLogs='" + caseLogs + '\'' +
-                ", isMarkedDone=" + isMarkedDone +
+                ", prioritizationType='" + prioritizationType + '\'' +
+                ", caseNotes='" + caseNotes + '\'' +
+                ", completionAt=" + completionAt +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", expiresAt=" + expiresAt +
