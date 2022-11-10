@@ -29,6 +29,9 @@ public class Employee {
     @Column(name = "businessGroup")
     private String businessGroup;
 
+    @Column(name = "isAdmin")
+    private boolean isAdmin;
+
     @CreationTimestamp
     @JsonFormat(pattern = "yy-MM-dd hh:mm", shape = JsonFormat.Shape.STRING)
     @Column(name = "created_at", nullable = false, updatable = false)

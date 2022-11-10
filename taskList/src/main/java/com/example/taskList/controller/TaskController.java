@@ -7,8 +7,10 @@ import com.example.taskList.repo.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 import static com.example.taskList.enumeration.ResponsePhrases.*;
@@ -27,13 +29,15 @@ public class TaskController {
 
     //Load tasks by employee id
     @GetMapping("/employees/{employeeId}/tasks")
-    public ResponseEntity<List<Task>> getAllTasksByEmployeeId(@PathVariable(value = "employeeId") Long employeeId) {
+    public String getAllTasksByEmployeeId(Model model, HttpSession session, @PathVariable(value = "employeeId") Long employeeId) {
         if (!employeeRepo.existsById(employeeId)) {
             throw new ResourceNotFoundException(NO_TASKS_ASSIGNED + employeeId + WAS_FOUND);
         }
+        session.setAttribute("employeeId", employeeId);
 
-        List<Task> tasks = taskRepo.findByEmployeeId(employeeId);
-        return new ResponseEntity<>(tasks, HttpStatus.OK);
+        List<Task> taskList = taskRepo.findByEmployeeId(employeeId);
+        model.addAttribute("taskList", taskList);
+        return "start";
     }
 
     //create task by employee id
