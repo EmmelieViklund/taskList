@@ -19,7 +19,12 @@
     border-top-right-radius: .3rem;
     border-bottom-right-radius: .3rem;
     }
+    }
 
+    a {
+        font-weight: bold;
+        text-decoration: line-through;
+        font-size: 100px;
     }
 
     .leaf-background {
@@ -40,4 +45,27 @@
     .btn-outline-orange:hover {
        background-color: rgb(236, 108, 48);
         color: white; 
+    }
+
+    .first-page-heading {
+        font-weight: bold;
+        font-size: 2rem;
+        color:black);
+    }
+
+    .d-inline-block {
+        padding-right: 3rem;
+    }
+
+    :root {
+        --bs-primary-rgb: 255, 255, 255;
+    }
+
+    .navbar {
+        border-top: 5px solid rgb(236, 108, 48);
+    }
+
+    .btn {
+        background-color: #fbf2ea;
+        border: 1px solid black;
     }

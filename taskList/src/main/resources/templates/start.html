@@ -21,32 +21,24 @@
     <body>
         <nav class="navbar bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    <img src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-                    Bootstrap
-                </a>
+                <div class="navbar-brand first-page-heading">
+                    <img src="8999-swedbank-logo-default.svg" alt="Logo" width="160" height="48" class="d-inline-block align-text-left">
+                        Task List
+                </div>
             </div>
         </nav>
 
         <div class="container-fluid">
             <table class="table table-hover">
-                <thead style="
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 80%;
-                    height: 100%;"
-                >
                 <tr>
-                    <th scope="col">prioritization</th>
-                    <th scope="col">caseNotes</th>
+                    <th scope="col">Prioritization</th>
+                    <th scope="col">Notes</th>
                     <th scope="col">Created</th>
                     <th scope="col">Updated</th>
                     <th scope="col">Expires</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
                 </tr>
-                </thead>
                 <tbody>
                 <tr th:each="task : ${taskList}">
                     <td th:text="${task.prioritizationType}"></td>
@@ -55,12 +47,12 @@
                     <td th:text="${task.updatedAt}"></td>
                     <td th:text="${task.expiresAt}"></td>
                     <td>
-                        <button type="button" class="btn btn-warning">
+                        <button type="button" class="btn btn-color-peach">
                             <span class="material-symbols-outlined">edit_note</span>
                         </button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-danger">
+                        <button type="button" class="btn btn-color-peach">
                             <span class="material-symbols-outlined">delete_sweep</span>
                         </button>
                     </td>
