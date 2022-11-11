@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 import static com.example.taskList.enumeration.ResponsePhrases.*;
@@ -36,6 +37,12 @@ public class TaskController {
         List<Task> taskList = taskRepo.findByUserId(userId);
         model.addAttribute("taskList", taskList);
         return "start";
+    }
+
+    @PostMapping("/ondelete")
+    String deleteTask(HttpSession session, Model model, @ModelAttribute Task task) {
+        taskRepo.deleteTaskById(task.getId());
+        return "redirect:/tasklist/{userId}";
     }
 
 

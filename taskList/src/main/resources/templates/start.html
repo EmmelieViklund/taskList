@@ -46,9 +46,12 @@
                         </button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-color-peach">
-                            <span class="material-symbols-outlined">delete_sweep</span>
-                        </button>
+                        <form action="/ondelete" method="post" th:object="${task}">
+                            <input hidden th:value="*{id}">
+                            <button type="submit" class="btn btn-color-peach">
+                                <span class="material-symbols-outlined">edit_note</span>
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 </tbody>
