@@ -2,19 +2,14 @@ package com.example.taskList.model;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-@Table(name = "employee")
-public class Employee {
+@Table(name = "App_User")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "employee_generator")
@@ -34,10 +29,16 @@ public class Employee {
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
 
-    public Employee() {
+    public User() {
     }
 
-    public Employee(Long id, String username, String password, boolean isAdmin, Date createdAt) {
+    public User(Long id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(Long id, String username, String password, boolean isAdmin, Date createdAt) {
         this.id = id;
         this.username = username;
         this.password = password;
