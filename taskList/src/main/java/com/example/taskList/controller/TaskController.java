@@ -2,6 +2,7 @@ package com.example.taskList.controller;
 
 import com.example.taskList.exception.ResourceNotFoundException;
 import com.example.taskList.model.Task;
+import com.example.taskList.model.User;
 import com.example.taskList.repo.UserRepository;
 import com.example.taskList.repo.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,6 @@ public class TaskController {
     @Autowired
     private TaskRepository taskRepo;
 
-    @GetMapping("/")
-    public String homePage() {
-        return "login";
-    }
-
     //Load tasks by employee id
     @GetMapping("/tasklist/{userId}")
     public String getAllTasksByEmployeeId(Model model, @PathVariable(value = "userId") Long userId) {
@@ -35,34 +31,36 @@ public class TaskController {
             throw new ResourceNotFoundException(NO_TASKS_ASSIGNED + userId + WAS_FOUND);
         }
         List<Task> taskList = taskRepo.findByUserId(userId);
+        Task task = new Task();
+
+        model.addAttribute("task", task);
         model.addAttribute("taskList", taskList);
         return "start";
     }
 
-    @PostMapping("/ondelete")
-    String deleteTask(HttpSession session, Model model, @ModelAttribute Task task) {
-        taskRepo.deleteTaskById(task.getId());
-        return "redirect:/tasklist/{userId}";
+    @PostMapping("/delete/task")
+    String deleteTask(HttpSession session, @RequestParam Long id) {
+        User user = (User) session.getAttribute("user");
+        Long userId = user.getId();
+        taskRepo.deleteById(id);
+        return "redirect:/tasklist/" + userId;
     }
 
-
-    /*@PostMapping("/create/task/{userId}")
-    public String createTask(Model model, @PathVariable(value = "userId") Long userId,
-                                           @RequestBody Task taskRequest) {
-
-        Task task = employeeRepo.findById(userId).map(user -> {
-            taskRequest.setUser(user);
-            return taskRepo.save(taskRequest);
-        }).orElseThrow(() -> new ResourceNotFoundException("Something Went Wrong" + userId));
-
-        model.addAttribute("addTask", task);
-
-        return "controllertest";
+    @PostMapping("/create/task")
+    public String createTask(Model model, HttpSession session, @ModelAttribute Task task) {
+        User user = (User) session.getAttribute("user");
+        Long userId = user.getId();
+        task.setUser(user);
+        taskRepo.save(task);
+        return "redirect:/tasklist/" + userId;
     }
 
-    @DeleteMapping("/task/delete/{id}")
-    public String deleteTask(Model model, @PathVariable("id") Long id) {
-         taskRepo.deleteById(id);
-        return "start";
-    }*/
+    @PostMapping("/edit/task")
+    public String editTask(Model model, HttpSession session, @ModelAttribute Task task) {
+        User user = (User) session.getAttribute("user");
+        Long userId = user.getId();
+        task.setUser(user);
+        taskRepo.save(task);
+        return "redirect:/tasklist/" + userId;
+    }
 }

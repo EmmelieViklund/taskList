@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>login</title>
     <!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-<link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <section class="h-100 gradient-form" style="background-color: #eee;">
@@ -25,34 +25,33 @@
                           style="width: 400px;" alt="logo">
                         <h5 class="mt-1 mb-5 pb-1"> Task List</h5>
                       </div>
-      
-                      <form th:object="${user}" method="post" action="/onUserLogin">
+
+                      <form th:object="${user}" method="POST"  th:action="@{/onUserLogin}">
                         <p>Please login to your account</p>
-      
+
                         <div class="form-outline mb-4">
-                          <input type="text" id="form2Example11" class="form-control"
-                            placeholder="Username" th:field="*{username}" />
-                          <label class="form-label" for="form2Example11">Username</label>
+                          <input th:field="*{username}" type="text"  class="form-control" placeholder="Username"  />
+                          <label class="form-label" for="username">Username</label>
                         </div>
-      
+
                         <div class="form-outline mb-4">
                           <input type="password" id="form2Example22" class="form-control" th:field="*{password}"/>
                           <label class="form-label" for="form2Example22">Password</label>
                         </div>
-      
+
                         <div class="text-center pt-1 mb-5 pb-1 d-grid gap-2">
                           <button class="btn btn-block fa-lg mb-3 btn-color-orange " type="submit">Log
                             in</button>
-                          <a class="text-muted text-decoration-none" href="#!">Forgot password?</a>
+                          <a class="text-muted text-decoration-none" href="#">Forgot password?</a>
                         </div>
-      
+
                         <!--div class="d-flex align-items-center justify-content-center pb-4">
                           <p class="mb-0 me-2">Don't have an account?</p>
                           <button type="button" class="btn btn-outline-orange" onclick="location.href='/createuser'">Create new</button>
                         </div-->
-      
+
                       </form>
-      
+
                     </div>
                   </div>
                   <div class="col-lg-6 d-flex align-items-center leaf-background" >
