@@ -45,15 +45,15 @@ public class Task {
     private Date expiresAt;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "employee_id", nullable = false)
+    @JoinColumn(name = "user_Id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private Employee employee;
+    private User user;
 
     public Task() {
     }
 
-    public Task(Long id, String prioritizationType, String caseNotes, LocalDateTime completionAt, Date createdAt, LocalDateTime updatedAt, Date expiresAt, Employee employee) {
+    public Task(Long id, String prioritizationType, String caseNotes, LocalDateTime completionAt, Date createdAt, LocalDateTime updatedAt, Date expiresAt, User user) {
         this.id = id;
         this.prioritizationType = prioritizationType;
         this.caseNotes = caseNotes;
@@ -61,7 +61,7 @@ public class Task {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.expiresAt = expiresAt;
-        this.employee = employee;
+        this.user = user;
     }
 
     public Long getId() {
@@ -120,12 +120,12 @@ public class Task {
         this.expiresAt = expiresAt;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public User getUser() {
+        return user;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -138,7 +138,7 @@ public class Task {
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", expiresAt=" + expiresAt +
-                ", employee=" + employee +
+                ", user=" + user +
                 '}';
     }
 }

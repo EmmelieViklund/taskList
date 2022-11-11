@@ -21,12 +21,12 @@
       
                       <div class="text-center">
                         <h4 class="mt-1 mb-3 pb-6"> Welcome to</h4>
-                        <img src="8999-swedbank-logo-default.svg"
+                        <img src="/8999-swedbank-logo-default.svg"
                           style="width: 400px;" alt="logo">
                         <h5 class="mt-1 mb-5 pb-1"> Task List</h5>
                       </div>
       
-                      <form th:object="${user}" method="post" action="/onuserlogin">
+                      <form th:object="${user}" method="post" action="/onUserLogin">
                         <p>Please login to your account</p>
       
                         <div class="form-outline mb-4">
@@ -46,10 +46,10 @@
                           <a class="text-muted text-decoration-none" href="#!">Forgot password?</a>
                         </div>
       
-                        <div class="d-flex align-items-center justify-content-center pb-4">
+                        <!--div class="d-flex align-items-center justify-content-center pb-4">
                           <p class="mb-0 me-2">Don't have an account?</p>
                           <button type="button" class="btn btn-outline-orange" onclick="location.href='/createuser'">Create new</button>
-                        </div>
+                        </div-->
       
                       </form>
       
