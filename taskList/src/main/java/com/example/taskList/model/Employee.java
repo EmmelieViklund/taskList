@@ -26,9 +26,6 @@ public class Employee {
     @Column(name="password", nullable = false, updatable = false)
     private String password;
 
-    @Column(name = "businessGroup")
-    private String businessGroup;
-
     @Column(name = "isAdmin")
     private boolean isAdmin;
 
@@ -37,28 +34,15 @@ public class Employee {
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
 
-    @UpdateTimestamp
-    @JsonFormat(pattern = "yy-MM-dd hh:mm", shape = JsonFormat.Shape.STRING)
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "admin_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private Admin admin;
-
     public Employee() {
     }
 
-    public Employee(Long id, String username, String password, String businessGroup, Date createdAt, LocalDateTime updatedAt, Admin admin) {
+    public Employee(Long id, String username, String password, boolean isAdmin, Date createdAt) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.businessGroup = businessGroup;
+        this.isAdmin = isAdmin;
         this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.admin = admin;
     }
 
     public Long getId() {
@@ -85,12 +69,12 @@ public class Employee {
         this.password = password;
     }
 
-    public String getBusinessGroup() {
-        return businessGroup;
+    public boolean isAdmin() {
+        return isAdmin;
     }
 
-    public void setBusinessGroup(String businessGroup) {
-        this.businessGroup = businessGroup;
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
     public Date getCreatedAt() {
@@ -101,32 +85,14 @@ public class Employee {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public Admin getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
-    }
-
     @Override
     public String toString() {
         return "Employee{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", businessGroup='" + businessGroup + '\'' +
+                ", isAdmin=" + isAdmin +
                 ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                ", admin=" + admin +
                 '}';
     }
 }

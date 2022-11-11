@@ -19,7 +19,7 @@ import static com.example.taskList.enumeration.ResponsePhrases.*;
 @RequestMapping("/employee")
 public class EmployeeController {
 
-    @Autowired
+    /*@Autowired
     private AdminRepository adminRepo;
 
     @Autowired
@@ -43,39 +43,5 @@ public class EmployeeController {
                 .orElseThrow(() -> new ResourceNotFoundException(NO_EMPLOYEES_WITH_ID + id));
 
         return new ResponseEntity<>(employee, HttpStatus.OK);
-    }
-
-    //create employee by admin id
-    @PostMapping("/administrators/{adminId}/employees")
-    public ResponseEntity<Employee> createEmployeeByAdminId(@PathVariable(value = "adminId") Long adminId,
-                                                            @RequestBody Employee employeeRequest) {
-
-        Employee employee = adminRepo.findById(adminId).map(admin -> {
-            employeeRequest.setAdmin(admin);
-            return employeeRepo.save(employeeRequest);
-        }).orElseThrow(() -> new ResourceNotFoundException(SOMETHING_WENT_WRONG + adminId));
-
-        return new ResponseEntity<>(employee, HttpStatus.CREATED);
-    }
-
-    //create employee by admin id
-    @PutMapping("/employees/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "id") Long id, @RequestBody Employee employeeRequest) {
-        Employee _employee = employeeRepo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(NO_EMPLOYEES_WITH_ID + id));
-
-        _employee.setUsername(employeeRequest.getUsername());
-        _employee.setPassword(employeeRequest.getPassword());
-        _employee.setBusinessGroup(employeeRequest.getBusinessGroup());
-
-        return new ResponseEntity<>(employeeRepo.save(_employee), HttpStatus.OK);
-    }
-
-    //delete employee by id
-    @DeleteMapping("/employees/{id}")
-    public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable("id") Long id ) {
-        employeeRepo.deleteById(id);
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+    }*/
 }

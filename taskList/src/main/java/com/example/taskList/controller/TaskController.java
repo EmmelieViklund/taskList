@@ -5,19 +5,16 @@ import com.example.taskList.model.Task;
 import com.example.taskList.repo.EmployeeRepository;
 import com.example.taskList.repo.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 import static com.example.taskList.enumeration.ResponsePhrases.*;
 
 @CrossOrigin(origins = "http://localhost:8080")
-@RestController
-@RequestMapping("/task")
+@Controller
 public class TaskController {
 
     @Autowired
@@ -26,63 +23,40 @@ public class TaskController {
     @Autowired
     private TaskRepository taskRepo;
 
+    @GetMapping("")
+    public String homePage() {
+        return "login";
+    }
 
     //Load tasks by employee id
     @GetMapping("/employees/{employeeId}/tasks")
-    public String getAllTasksByEmployeeId(Model model, HttpSession session, @PathVariable(value = "employeeId") Long employeeId) {
+    public String getAllTasksByEmployeeId(Model model, @PathVariable(value = "employeeId") Long employeeId) {
         if (!employeeRepo.existsById(employeeId)) {
             throw new ResourceNotFoundException(NO_TASKS_ASSIGNED + employeeId + WAS_FOUND);
         }
-        session.setAttribute("employeeId", employeeId);
-
         List<Task> taskList = taskRepo.findByEmployeeId(employeeId);
         model.addAttribute("taskList", taskList);
         return "start";
     }
 
-    //create task by employee id
+
     @PostMapping("/employees/{employeeId}/tasks")
-    public ResponseEntity<Task> createTask(@PathVariable(value = "employeeId") Long employeeId,
+    public String createTask(Model model, @PathVariable(value = "employeeId") Long employeeId,
                                            @RequestBody Task taskRequest) {
 
         Task task = employeeRepo.findById(employeeId).map(employee -> {
             taskRequest.setEmployee(employee);
             return taskRepo.save(taskRequest);
-        }).orElseThrow(() -> new ResourceNotFoundException(SOMETHING_WENT_WRONG + employeeId));
+        }).orElseThrow(() -> new ResourceNotFoundException("Something Went Wrong" + employeeId));
 
-        return new ResponseEntity<>(task, HttpStatus.CREATED);
+        model.addAttribute("addTask", task);
+
+        return "start";
     }
 
-    //get tasks by employee id
-    @GetMapping("/tasks/{id}")
-    public ResponseEntity<Task> getTasksByEmployeeId(@PathVariable(value = "id") Long id) {
-        Task task = taskRepo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(NO_TASKS_ASSIGNED + id + WAS_FOUND));
-
-        return new ResponseEntity<>(task, HttpStatus.OK);
-    }
-
-    //update tasks by employee id
-    @PutMapping("/tasks/update/{id}")
-    public ResponseEntity<Task> updateTask(@PathVariable(value = "id") Long id, @RequestBody Task taskRequest) {
-        Task _task = taskRepo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(NOT_FOUND_TASKS + id + WAS_FOUND));
-
-        _task.setCustomerName(taskRequest.getCustomerName());
-        _task.setGlobalCaseId(taskRequest.getGlobalCaseId());
-        _task.setTaskType(_task.getTaskType());
-        _task.setCaseLogs(taskRequest.getCaseLogs());
-        _task.setMarkedDone(taskRequest.isMarkedDone());
-        _task.setUpdatedAt(taskRequest.getUpdatedAt());
-
-        return new ResponseEntity<>(taskRepo.save(_task), HttpStatus.OK);
-    }
-
-    //delete task by employeeId
     @DeleteMapping("/task/delete/{id}")
-    public ResponseEntity<HttpStatus> deleteTask(@PathVariable("id") Long id) {
-        taskRepo.deleteTaskById(id);
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public String deleteTask(Model model, @PathVariable("id") Long id) {
+        taskRepo.deleteById(id);
+        return "start";
     }
 }
