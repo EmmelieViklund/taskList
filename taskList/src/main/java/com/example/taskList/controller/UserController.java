@@ -27,28 +27,32 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("")
-    public String level1(){
+    @GetMapping("/")
+    public String level1(Model model){
+        User user = new User();
+        model.addAttribute("user", user);
         return "login";
     }
 
+    //Fixa exception om user = null
     @PostMapping("/onUserLogin")
-    public String onUserLogin(HttpSession session) {
-        User user = new User(1L,"username","password");
+    public String onUserLogin(HttpSession session, Model model, @ModelAttribute User user) {
         User userObj;
         if (user.getUsername() != null && user.getPassword() != null) {
+
             try {
                 userObj = userService.fetchUserByUsernameAndPassword(user.getUsername(), user.getPassword());
+                model.addAttribute("user", userObj);
             } catch (UserNotFoundException e) {
                 e.printStackTrace();
                 return "login";
             }
             if (userObj != null) {
-                session.setAttribute("userId", userObj.getId());
+                session.setAttribute("user", userObj);
                 return "redirect:/tasklist/" + userObj.getId();
             }
         }
-        return "login";
+        return "redirect:/";
     }
 
     @GetMapping("/secret")
@@ -62,12 +66,12 @@ public class UserController {
 
     @GetMapping("/logout")
     public String logout(HttpSession session, HttpServletResponse res){
-        session.removeAttribute("username"); // this would be an ok solution
+        session.removeAttribute("user"); // this would be an ok solution
         session.invalidate(); // you could also invalidate the whole session, a new session will be created the next request
         Cookie cookie = new Cookie("JSESSIONID", "");
         cookie.setMaxAge(0);
         res.addCookie(cookie);
-        return "login";
+        return "redirect:/";
     }
 
 
