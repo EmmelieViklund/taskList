@@ -18,10 +18,6 @@
                 <div class="navbar-brand first-page-heading">
                     <img src="/8999-swedbank-logo-default.svg" alt="Logo" width="160" height="48" class="d-inline-block align-text-left">
                         Task List
-                         <!-- Button trigger modal -->
-                      <button type="button" class="btn btn-outline-orange" data-bs-toggle="modal"
-                      data-bs-target="#exampleModal">Create new
-                    </button>
                 </div>
                 <div>
                     <button class="btn btn-color-peach" onclick="location.href='/logout'">
@@ -103,6 +99,10 @@
                 </select>
                 <input type="Date" th:field="*{expiresAt}">
                 <input class="btn btn-color-orange" type="submit" value="Create task">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-orange" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">Create new
+            </button>
             </form>
         </div>
 
