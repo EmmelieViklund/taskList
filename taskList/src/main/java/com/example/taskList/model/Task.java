@@ -6,8 +6,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -24,7 +26,7 @@ public class Task {
 
     @Column(name = "caseNotes")
     private String caseNotes;
-    @UpdateTimestamp
+
     @JsonFormat(pattern = "yy-MM-dd", shape = JsonFormat.Shape.STRING)
     @Column(name = "completion_At")
     private LocalDateTime completionAt;
@@ -37,11 +39,12 @@ public class Task {
     @UpdateTimestamp
     @JsonFormat(pattern = "yy-MM-dd", shape = JsonFormat.Shape.STRING)
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    private Date updatedAt;
 
-    @CreationTimestamp
-    @JsonFormat(pattern = "yy-MM-dd", shape = JsonFormat.Shape.STRING)
-    @Column(name = "expires_at", nullable = false, updatable = false)
+
+    //@JsonFormat(pattern = "yy-MM-dd", shape = JsonFormat.Shape.STRING)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "expires_at")
     private Date expiresAt;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -53,7 +56,7 @@ public class Task {
     public Task() {
     }
 
-    public Task(Long id, String prioritizationType, String caseNotes, LocalDateTime completionAt, Date createdAt, LocalDateTime updatedAt, Date expiresAt, User user) {
+    public Task(Long id, String prioritizationType, String caseNotes, LocalDateTime completionAt, Date createdAt, Date updatedAt, Date expiresAt, User user) {
         this.id = id;
         this.prioritizationType = prioritizationType;
         this.caseNotes = caseNotes;
@@ -104,11 +107,11 @@ public class Task {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 

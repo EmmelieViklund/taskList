@@ -76,18 +76,17 @@ public class UserController {
         return "redirect:/";
     }
 
-       @PostMapping("/create/user")
+   @PostMapping("/create/user")
     String createUser(Model model, @ModelAttribute User user) {
-        boolean UserAddedSuccess;
+        boolean userAddedSuccess;
         if(userRepo.findByUsername(user.getUsername()) == null) {
             user.setCreatedAt(LocalDateTime.now());
             userRepo.save(user);
-            UserAddedSuccess = true;
-            model.addAttribute(UserAddedSuccess);
+            userAddedSuccess = true;
         } else {
-            UserAddedSuccess = false;
-            model.addAttribute(UserAddedSuccess);
+            userAddedSuccess = false;
         }
+           model.addAttribute("userAddedSuccess",userAddedSuccess);
         return "redirect:/";
     }
 

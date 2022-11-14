@@ -89,19 +89,14 @@
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
-  height: 100%;
-  width: 100%; /* Could be more or less, depending on screen size */
+  width: 80%; /* Could be more or less, depending on screen size */
 }
 
 .modal-body {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    width: 100%;
-}
-.modal-container{
-    display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: left;
     height: 100%;
     width: 100%;
 }
