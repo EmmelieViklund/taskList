@@ -7,132 +7,183 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Start</title>
     <!-- Material Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
-    <body>
-        <nav class="navbar bg-color-orange" style="display: flex;">
-            <div class="container-fluid justify-content-between">
-                <div class="navbar-brand first-page-heading">
-                    <img src="/8999-swedbank-logo-default.svg" alt="Logo" width="160" height="48" class="d-inline-block align-text-left">
-                        Task List
-                         <!-- Button trigger modal -->
-                      <button type="button" class="btn btn-outline-orange" data-bs-toggle="modal"
-                      data-bs-target="#exampleModal">Create new
-                    </button>
+<body>
+<nav class="navbar bg-color-orange" style="display: flex;">
+    <div class="container-fluid justify-content-between">
+        <div class="navbar-brand first-page-heading">
+            <img src="/8999-swedbank-logo-default.svg" alt="Logo" width="160" height="48"
+                 class="d-inline-block align-text-left">
+            Task List
+        </div>
+        <div>
+            <button class="btn btn-color-peach" onclick="location.href='/logout'">
+                <div style="display: flex">
+                    <span class="material-symbols-outlined">logout</span>
+                    <p>Logout</p>
                 </div>
-                <div>
-                    <button class="btn btn-color-peach" onclick="location.href='/logout'">
-                        <div style="display: flex">
-                            <span class="material-symbols-outlined">logout</span>
-                            <p>Logout</p>
-                        </div>
-                    </button>
-                </div>
-            </div>
-        </nav>
+            </button>
+        </div>
+    </div>
+</nav>
 
-        <div class="container-fluid">
-            <table class="table table-hover">
-                <tr>
-                    <th scope="col">Prioritization</th>
-                    <th scope="col">Notes</th>
-                    <th scope="col">Created</th>
-                    <th scope="col">Updated</th>
-                    <th scope="col">Expires</th>
-                    <th scope="col">Mark Done</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Delete</th>
-                </tr>
-                <tbody>
-                    <tr th:each="task : ${taskList}">
-                        <td th:text="${task.prioritizationType}"></td>
-                        <td th:text="${task.caseNotes}"></td>
-                        <td th:text="${task.createdAt}"></td>
-                        <td th:text="${task.updatedAt}"></td>
-                        <td th:text="${task.expiresAt}"></td>
-                        <td>
-                            <button type="submit" class="btn btn-success">
-                                <span class="material-symbols-outlined">done</span>
-                            </button>
-                        </td>
-                        <td>
-                            <!-- Knapp för att öppna en modal för edit task -->
-                            <button type="button" class="btn btn-warn">
-                                <span class="material-symbols-outlined">edit_note</span>
-                            </button>
+<div class="toolbar"
+     style="height: 100%; width: 100%; display: flex; justify-content: space-between;">
+    <div>
+        <h1>Task List</h1>
+    </div>
+    <!-- Button trigger modal -->
+    <div>
+        <button type="button" class="btn btn-outline-orange" data-bs-toggle="modal"
+                data-bs-target="#createTaskModal">Create new
+            <span class="material-symbols-outlined">add_task</span>
+        </button>
+    </div>
 
-                            <!--form action="/edit/task" method="POST">
-                                <input class="btn btn-primary" type="submit" value="edit task">
-                                <input type="text" th:field="*{caseNotes}">
-                                <select th:field="*{prioritizationType}">
-                                    <option value="urgent">urgent</option>
-                                    <option value="no rush">no rush</option>
-                                </select>
-                                <input type="Date" th:field="*{expiresAt}">
-                                <input type="hidden" name="id" th:value="${task.id}">
-                                <button type="submit" class="btn btn-color-peach">
-                                    <span class="material-symbols-outlined">
-                                    check
-                                    </span>
-                                </button>
-                            </form-->
-                        </td>
-                        <td>
-                            <form action="/delete/task" method="POST">
-                                <input type="hidden" name="id" id="id" th:value="${task.id}">
-                                <button type="submit" class="btn btn-danger">
-                                    <span class="material-symbols-outlined">
-                                    delete
-                                    </span>
-                                </button>
+</div>
+
+<div class="container-fluid">
+    <table class="table table-hover table-striped">
+        <tr>
+            <th scope="col">Prioritization</th>
+            <th scope="col">Notes</th>
+            <th scope="col">Created</th>
+            <th scope="col">Updated</th>
+            <th scope="col">Expires</th>
+            <th scope="col">Mark Done</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+        <tbody>
+        <tr th:each="task : ${taskList}">
+            <td th:text="${task.prioritizationType}"></td>
+            <td th:text="${task.caseNotes}"></td>
+            <td th:text="${task.createdAt}"></td>
+            <td th:text="${task.updatedAt}"></td>
+            <td th:text="${task.expiresAt}"></td>
+            <td>
+                <button type="submit" class="btn btn-success">
+                    <span class="material-symbols-outlined">done</span>
+                </button>
+            </td>
+            <td>
+                <!-- Button Edit Task Modal -->
+                <button type="button" class="btn btn-outline-orange" data-bs-toggle="modal"
+                        th:data-bs-target="${'#editTaskModal' + task.id}">
+                    <span class="material-symbols-outlined">edit</span>
+                </button>
+                <!-- Edit task Modal -->
+                <div class="modal fade" th:id="${'editTaskModal' + task.id}" data-bs-backdrop="false" tabindex="-1" aria-labelledby="editTaskModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="editTaskModalLabel">New user</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="/edit/task" th:object="${task}" method="POST">
+                                <div class="modal-body">
+                                    <input class="btn btn-primary" type="submit" value="edit task">
+                                    <input type="text" th:field="*{caseNotes}">
+                                    <select th:field="*{prioritizationType}">
+                                        <option value="urgent">urgent</option>
+                                        <option value="no rush">no rush</option>
+                                    </select>
+                                    <input type="Date" th:field="*{expiresAt}">
+                                    <input type="hidden" name="id" th:value="${task.id}">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-color-peach">
+                            <span class="material-symbols-outlined">
+                            check
+                            </span>
+                                    </button>
+                                </div>
                             </form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="container-fluid">
-            <form action="/create/task" method="POST" th:object="${task}">
-                <input type="text" th:field="*{caseNotes}">
-                <select th:field="*{prioritizationType}">
-                    <option value="urgent">Urgent</option>
-                    <option value="no rush">No rush</option>
-                </select>
-                <input type="Date" th:field="*{expiresAt}">
-                <input class="btn btn-color-orange" type="submit" value="Create task">
-            </form>
-        </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <!-- Button Delete Task Modal -->
+                <button type="button" class="btn btn-outline-orange" data-bs-toggle="modal"
+                        th:data-bs-target="${'#deleteTaskModal' + task.id}">
+                    <span class="material-symbols-outlined">delete</span>
+                </button>
+                <!-- Delete task Modal -->
+                <div class="modal fade" th:id="${'deleteTaskModal' + task.id}" data-bs-backdrop="false" tabindex="-1" aria-labelledby="deleteTaskModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="deleteTaskModalLabel">New user</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/delete/task" method="POST">
+                                    <input type="hidden" name="id" id="id" th:value="${task.id}">
+                                    <p>Are you sure you want to delete this task?</p>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                    <input class="btn btn-color-orange" type="submit" value="Delete task">
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
-        <!-- JavaScript Bundle with Popper -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-    </body>
-     <!-- Modal -->
-  <div class="modal fade" id="exampleModal" data-bs-backdrop="false" tabindex="-1" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">New user</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
 
-
-            ---
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+</body>
+<!-- Create Task Modal -->
+<div class="modal fade" id="createTaskModal" data-bs-backdrop="false" tabindex="-1" aria-labelledby="createTaskModalLabel"
+aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title fs-5" id="createTaskModalLabel">New user</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <form action="/create/task" method="POST" th:object="${task}">
+            <input type="text" th:field="*{caseNotes}">
+            <select th:field="*{prioritizationType}">
+                <option value="urgent">Urgent</option>
+                <option value="no rush">No rush</option>
+            </select>
+            <input type="Date" th:field="*{expiresAt}">
+            <input class="btn btn-color-orange" type="submit" value="Create task">
+        </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary">Save changes</button>
     </div>
   </div>
 </div>
-      <!-- JavaScript Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-  crossorigin="anonymous"></script>
+
+
+
+</div>
+</div>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
 </html>

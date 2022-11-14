@@ -17,6 +17,4 @@ public class TaskListApplication {
 		SpringApplication.run(TaskListApplication.class, args);
 	}
 
-
-
 }

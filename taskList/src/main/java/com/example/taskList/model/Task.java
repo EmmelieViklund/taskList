@@ -25,22 +25,22 @@ public class Task {
     @Column(name = "caseNotes")
     private String caseNotes;
     @UpdateTimestamp
-    @JsonFormat(pattern = "yy-MM-dd hh:mm", shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yy-MM-dd", shape = JsonFormat.Shape.STRING)
     @Column(name = "completion_At")
     private LocalDateTime completionAt;
 
     @CreationTimestamp
-    @JsonFormat(pattern = "yy-MM-dd hh:mm", shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yy-MM-dd", shape = JsonFormat.Shape.STRING)
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
 
     @UpdateTimestamp
-    @JsonFormat(pattern = "yy-MM-dd hh:mm", shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yy-MM-dd", shape = JsonFormat.Shape.STRING)
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     @CreationTimestamp
-    @JsonFormat(pattern = "yy-MM-dd hh:mm", shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yy-MM-dd", shape = JsonFormat.Shape.STRING)
     @Column(name = "expires_at", nullable = false, updatable = false)
     private Date expiresAt;
 

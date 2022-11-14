@@ -56,7 +56,7 @@ public class TaskController {
     }
 
     @PostMapping("/edit/task")
-    public String editTask(Model model, HttpSession session, @ModelAttribute Task task) {
+    public String editTask(Model model, HttpSession session, @ModelAttribute Task task, @RequestParam Long id) {
         User user = (User) session.getAttribute("user");
         Long userId = user.getId();
         task.setUser(user);
