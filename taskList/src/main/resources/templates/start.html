@@ -144,6 +144,20 @@
         </tbody>
     </table>
 </div>
+<div class="container-fluid">
+    <form action="/create/task" method="POST" th:object="${task}">
+        <input type="text" th:field="*{caseNotes}">
+        <select th:field="*{prioritizationType}">
+            <option value="urgent">Urgent</option>
+            <option value="no rush">No rush</option>
+        </select>
+        <input type="Date" th:field="*{expiresAt}">
+
+        <button type="button" class="btn btn-outline-orange" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">Create task
+        </button>
+    </form>
+</div>
 
 
 <!-- JavaScript Bundle with Popper -->
