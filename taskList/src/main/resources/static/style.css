@@ -21,12 +21,6 @@
     }
     }
 
-    a {
-        font-weight: bold;
-        text-decoration: line-through;
-        font-size: 100px;
-    }
-
     .leaf-background {
         background-image: url("background-sm.jpg");
     }
