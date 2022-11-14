@@ -76,7 +76,7 @@ public class UserController {
         return "redirect:/";
     }
 
-       @PostMapping("/create/user")
+   @PostMapping("/create/user")
     String createUser(Model model, @ModelAttribute User user) {
         boolean userAddedSuccess;
         if(userRepo.findByUsername(user.getUsername()) == null) {
