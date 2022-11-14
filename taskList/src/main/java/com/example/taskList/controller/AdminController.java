@@ -15,7 +15,7 @@ import static com.example.taskList.enumeration.ResponsePhrases.*;
 @Controller
 @RequestMapping ("/admin")
 public class AdminController {
-    /*@Autowired
+    @Autowired
     AdminRepository adminRepo;
 
     //Create Admin
@@ -50,5 +50,5 @@ public class AdminController {
         adminRepo.deleteById(id);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }*/
+    }
 }
