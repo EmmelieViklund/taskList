@@ -84,14 +84,30 @@ public class UserController {
             userRepo.save(user);
             UserAddedSuccess = true;
             model.addAttribute(UserAddedSuccess);
-        } else {
+            return "User created";
+        }
+        if (userRepo.findByUsername(user.getUsername()) != null){
             UserAddedSuccess = false;
             model.addAttribute(UserAddedSuccess);
+            return "User already exist ";
         }
         return "redirect:/";
     }
 
-
+//    @PostMapping("/create/user")
+//    String createUser(Model model, @ModelAttribute User user) {
+//        boolean UserAddedSuccess;
+//        if(userRepo.findByUsername(user.getUsername()) == null) {
+//            user.setCreatedAt(LocalDateTime.now());
+//            userRepo.save(user);
+//            UserAddedSuccess = true;
+//            model.addAttribute(UserAddedSuccess);
+//        } else {
+//            UserAddedSuccess = false;
+//            model.addAttribute(UserAddedSuccess);
+//        }
+//        return "redirect:/";
+//    }
 
 
 
