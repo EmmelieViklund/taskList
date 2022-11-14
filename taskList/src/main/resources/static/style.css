@@ -28,8 +28,11 @@
     .btn-color-orange {
         background-color: rgb(236, 108, 48);
         color: white;
-        text-transform: uppercase;
         font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .btn-uppercase {
+        text-transform: uppercase;
     }
 
     .btn-outline-orange{
