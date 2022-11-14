@@ -72,6 +72,10 @@
                     <input type="hidden" name="id" th:value="${task.id}">
                 <button type="submit" class="btn btn-success">
                     <span class="material-symbols-outlined">done</span>
+                    <span th:if="${completionAt != 'null'}"class="material-symbols-outlined">
+                    remove_done
+                    </span>
+
                 </button>
                 </form>
             </td>
