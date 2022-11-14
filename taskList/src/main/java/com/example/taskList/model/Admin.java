@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Admin {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "admin_generator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "admin_generator") //skappar ny ID varje gång
     private Long id;
 
     @Column(name="username", nullable = false, updatable = false)
