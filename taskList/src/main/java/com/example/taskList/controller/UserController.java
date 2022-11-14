@@ -3,6 +3,7 @@ import com.example.taskList.Service.UserService;
 import com.example.taskList.exception.UserNotFoundException;
 import com.example.taskList.model.User;
 import com.example.taskList.repo.UserRepository;
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -71,6 +73,21 @@ public class UserController {
         Cookie cookie = new Cookie("JSESSIONID", "");
         cookie.setMaxAge(0);
         res.addCookie(cookie);
+        return "redirect:/";
+    }
+
+    @PostMapping("/create/user")
+    String createUser(Model model, @ModelAttribute User user) {
+        boolean UserAddedSuccess;
+        if(userRepo.findByUsername(user.getUsername()) == null) {
+            user.setCreatedAt(LocalDateTime.now());
+            userRepo.save(user);
+            UserAddedSuccess = true;
+            model.addAttribute(UserAddedSuccess);
+        } else {
+            UserAddedSuccess = false;
+            model.addAttribute(UserAddedSuccess);
+        }
         return "redirect:/";
     }
 

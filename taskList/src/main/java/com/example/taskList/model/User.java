@@ -2,9 +2,11 @@ package com.example.taskList.model;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import net.bytebuddy.asm.Advice;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -27,7 +29,7 @@ public class User {
     @CreationTimestamp
     @JsonFormat(pattern = "yy-MM-dd hh:mm", shape = JsonFormat.Shape.STRING)
     @Column(name = "created_at", nullable = false, updatable = false)
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     public User() {
     }
@@ -38,7 +40,7 @@ public class User {
         this.password = password;
     }
 
-    public User(Long id, String username, String password, boolean isAdmin, Date createdAt) {
+    public User(Long id, String username, String password, boolean isAdmin, LocalDateTime createdAt) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -78,11 +80,11 @@ public class User {
         isAdmin = admin;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
