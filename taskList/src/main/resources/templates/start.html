@@ -98,11 +98,11 @@
             <form action="/create/task" method="POST" th:object="${task}">
                 <input type="text" th:field="*{caseNotes}">
                 <select th:field="*{prioritizationType}">
-                    <option value="urgent">urgent</option>
-                    <option value="no rush">no rush</option>
+                    <option value="urgent">Urgent</option>
+                    <option value="no rush">No rush</option>
                 </select>
                 <input type="Date" th:field="*{expiresAt}">
-                <input class="btn btn-primary" type="submit" value="create task">
+                <input class="btn btn-color-orange" type="submit" value="Create task">
             </form>
         </div>
 
