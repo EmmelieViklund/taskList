@@ -68,9 +68,12 @@
             <td th:text="${task.updatedAt}"></td>
             <td th:text="${task.expiresAt}"></td>
             <td>
+                <form action="/complete/task" method="post">
+                    <input type="hidden" name="id" th:value="${task.id}">
                 <button type="submit" class="btn btn-success">
                     <span class="material-symbols-outlined">done</span>
                 </button>
+                </form>
             </td>
             <td>
                 <!-- Button Edit Task Modal -->
@@ -95,7 +98,7 @@
                                         <option value="urgent">urgent</option>
                                         <option value="no rush">no rush</option>
                                     </select>
-                                    <input type="Date" th:field="*{expiresAt}">
+                                    <input type="Date" name="expiresAt" th:field="*{expiresAt}">
                                     <input type="hidden" name="id" th:value="${task.id}">
                                 </div>
                                 <div class="modal-footer">
@@ -181,7 +184,7 @@ aria-hidden="true">
                 <option value="urgent">Urgent</option>
                 <option value="no rush">No rush</option>
             </select>
-            <input type="Date" th:field="*{expiresAt}">
+            <input type="Date" id="expiresAt" name="expiresAt" th:field="*{expiresAt}">
             <input class="btn btn-color-orange" type="submit" value="Create task">
         </form>
     </div>

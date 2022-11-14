@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static com.example.taskList.enumeration.ResponsePhrases.*;
 
@@ -47,7 +49,7 @@ public class TaskController {
     }
 
     @PostMapping("/create/task")
-    public String createTask(Model model, HttpSession session, @ModelAttribute Task task) {
+    public String createTask(HttpSession session, @ModelAttribute Task task) {
         User user = (User) session.getAttribute("user");
         Long userId = user.getId();
         task.setUser(user);
@@ -61,6 +63,29 @@ public class TaskController {
         Long userId = user.getId();
         task.setUser(user);
         taskRepo.save(task);
+        return "redirect:/tasklist/" + userId;
+    }
+
+    @PostMapping("/complete/task")
+    String completeTask(Model model, HttpSession session, @RequestParam Long id) {
+        User user = (User)session.getAttribute("user");
+        Long userId = user.getId();
+
+        Task task = taskRepo.findById(id).orElse(null);
+
+        boolean taskSuccessfullyCompleted;
+        if(task != null && taskRepo.findById(task.getId()).isPresent()) {
+            if(taskRepo.findById(task.getId()).get().getCompletionAt() == null) {
+                task.setCompletionAt(LocalDateTime.now());
+            } else {
+                task.setCompletionAt(null);
+            }
+            taskSuccessfullyCompleted = true;
+            taskRepo.save(task);
+        } else {
+            taskSuccessfullyCompleted = false;
+        }
+        model.addAttribute("taskSuccessfullyCompleted", taskSuccessfullyCompleted);
         return "redirect:/tasklist/" + userId;
     }
 }
