@@ -85,27 +85,29 @@
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            <form action="/create/user" method="post" th:object="${user}">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">New user</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
                 <hr>
                 <label for="user"><b>Username</b></label>
-                <input class="form-control" type="text" placeholder="Username" name="user" id="user" required>
-                <label for="psw"><b>Password</b></label>
-                <input class="form-control" type="password" placeholder="Enter Password" name="psw" id="psw" required>
+                <input class="form-control" type="text" placeholder="Username" id="user" th:field="*{username}" required>
+                <label for="password"><b>Password</b></label>
+                <input class="form-control" type="password" placeholder="Enter Password" id="password" th:field="*{password}" required>
                 <label for="psw-repeat"><b>Repeat Password</b></label>
                 <input class="form-control" type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
+
                 <hr>
 
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-color-orange">Save changes</button>
+                <button type="submit" class="btn btn-color-orange">Save changes</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
