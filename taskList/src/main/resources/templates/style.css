@@ -92,6 +92,15 @@
   width: 80%; /* Could be more or less, depending on screen size */
 }
 
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: left;
+    height: 100%;
+    width: 100%;
+}
+
 /* The Close Button */
 .close {
   color: rgb(236, 108, 48);
