@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.example.taskList.enumeration.ResponsePhrases.*;
@@ -28,7 +29,15 @@ public class TaskController {
 
     //Load tasks by employee id
     @GetMapping("/tasklist/{userId}")
-    public String getAllTasksByEmployeeId(Model model, @PathVariable(value = "userId") Long userId) {
+    public String getAllTasksByEmployeeId(HttpSession session, Model model, @PathVariable(value = "userId") Long userId) {
+        User user = (User)session.getAttribute("user");
+        if(session.getAttribute("user") == null) {
+            return "redirect:/";
+        }
+        if(!Objects.equals(user.getId(), userId)) {
+            return "redirect:/tasklist/" + user.getId();
+        }
+
         if (!employeeRepo.existsById(userId)) {
             throw new ResourceNotFoundException(NO_TASKS_ASSIGNED + userId + WAS_FOUND);
         }
