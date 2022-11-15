@@ -36,7 +36,7 @@
 <div class="toolbar"
      style="height: 100%; width: 100%; display: flex; justify-content: space-between;">
     <div>
-        <h1>Task List</h1>
+        <h1></h1>
     </div>
     <!-- Button trigger modal -->
     <div>
@@ -71,10 +71,11 @@
                 <form action="/complete/task" method="post">
                     <input type="hidden" name="id" th:value="${task.id}">
                 <button type="submit" class="btn btn-success">
-                    <span class="material-symbols-outlined">done</span>
-                    <span th:if="${completionAt != 'null'}"class="material-symbols-outlined">
+
+                    <span th:if="${task.completionAt != null}"class="material-symbols-outlined">
                     remove_done
                     </span>
+                    <span th:if="${task.completionAt == null}" class="material-symbols-outlined">done</span>
 
                 </button>
                 </form>
@@ -130,7 +131,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="deleteTaskModalLabel">New user</h1>
+                                <h1 class="modal-title fs-5" id="deleteTaskModalLabel">Delete task</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
