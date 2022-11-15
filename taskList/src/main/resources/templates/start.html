@@ -18,13 +18,18 @@
 <nav class="navbar bg-color-orange" style="display: flex;">
     <div class="container-fluid justify-content-between">
         <div class="navbar-brand first-page-heading">
-            <img src="/8999-swedbank-logo-default.svg" alt="Logo" width="160" height="48"
+            <img src="/8999-swedbank-logo-default.svg" alt="Logo" width="200" height="70"
                  class="d-inline-block align-text-left">
-            Task List
         </div>
         <div>
-            <button class="btn btn-color-peach" onclick="location.href='/logout'">
-                <div style="display: flex">
+            <button type="button" class="btn btn-color-peach" onclick="location.href='/logout'"
+                                        style="display: grid;
+                                        justify-content: center;
+                                        align-items: center;
+                                        border: 2px solid black;
+                                        padding: 10px;
+                                        border-radius: 10px;">
+                <div style="width: 100%; height: 100%;">
                     <span class="material-symbols-outlined">logout</span>
                     <p>Logout</p>
                 </div>
@@ -34,18 +39,17 @@
 </nav>
 
 <div class="toolbar"
-     style="height: 100%; width: 100%; display: flex; justify-content: space-between;">
+     style="height: 100%; width: 100%; display: flex; justify-content: space-between; padding: 1.2rem;">
     <div>
-        <h1></h1>
+        <h2>Task List</h2>
     </div>
     <!-- Button trigger modal -->
     <div>
         <button type="button" class="btn btn-outline-orange" data-bs-toggle="modal"
-                data-bs-target="#createTaskModal">Create new
+                data-bs-target="#createTaskModal">Create Task
             <span class="material-symbols-outlined">add_task</span>
         </button>
     </div>
-
 </div>
 
 <div class="container-fluid">
@@ -107,7 +111,7 @@
                                         <option value="no rush">No Rush</option>
                                     </select>
                                     <label for="expiresAt" class="form-label">Expires At</label>
-                                    <input class="form-control" type="Date" id="expiresAt" name="expiresAt" th:field="*{expiresAt}">
+                                    <input type="Date" id="expiresAt" name="expiresAt" th:field="*{expiresAt}">
                                     <input type="hidden" name="id" th:value="${task.id}">
                                 </div>
                                 <div class="modal-footer">
@@ -186,7 +190,7 @@
                             <option value="no rush">No rush</option>
                         </select>
                         <label for="expiresAt" class="form-label">Expires At</label>
-                        <input class="form-control" type="Date" th:field="*{expiresAt}">
+                        <input type="Date"  name="expiresAt" th:field="*{expiresAt}">
                     </div>
                 </div>
                 <div class="modal-footer">
