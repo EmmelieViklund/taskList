@@ -107,8 +107,8 @@
                                     <input class="form-control" type="text" id="caseNotes" th:field="*{caseNotes}">
                                     <label for="prioritizationType" class="form-label">Prioritization</label>
                                     <select class="form-control" id="prioritizationType" th:field="*{prioritizationType}">
-                                        <option value="urgent">Urgent</option>
-                                        <option value="no rush">No Rush</option>
+                                        <option value="Urgent">Urgent</option>
+                                        <option value="No Rush">No Rush</option>
                                     </select>
                                     <label for="expiresAt" class="form-label">Expires At</label>
                                     <input type="Date" id="expiresAt" name="expiresAt" th:field="*{expiresAt}">
@@ -117,11 +117,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
                                     </button>
-                                    <button type="submit" class="btn btn-color-orange">Edit Task
-                                        <span class="material-symbols-outlined">
-                                        check
-                                        </span>
-                                    </button>
+                                    <button type="submit" class="btn btn-color-orange">Edit Task</button>
                                 </div>
                             </form>
                         </div>
@@ -186,8 +182,8 @@
                         <input class="form-control" type="text" th:field="*{caseNotes}">
                         <label for="prioritizationType"  class="form-label">Prioritization</label>
                         <select class="form-control" th:field="*{prioritizationType}">
-                            <option value="urgent">Urgent</option>
-                            <option value="no rush">No rush</option>
+                            <option value="Urgent">Urgent</option>
+                            <option value="No rush">No rush</option>
                         </select>
                         <label for="expiresAt" class="form-label">Expires At</label>
                         <input type="Date"  name="expiresAt" th:field="*{expiresAt}">
